@@ -52,12 +52,7 @@ def unet(pretrained_weights = None,input_size = (256,256,1)):
     conv9 = Conv2D(2, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
     conv10 = Conv2D(1, 1, activation = 'sigmoid')(conv9)
     
-
-    model = Model(input = inputs, output = conv10)
-    
-    #model.add(Conv2D(1, [3,3], kernel_initializer=kernel_init, padding="valid"))
-    
-    #model.add(Conv2D(1, (3, 3), activation='relu', input_shape=(3, 1024, 1024), kernel_initializer=your_function, data_format='channels_first'))
+    model = Model(inputs = [inputs], outputs = [conv10])
 
     model.compile(optimizer = Adam(lr = 1e-4), loss = 'binary_crossentropy', metrics = ['accuracy'])
     
