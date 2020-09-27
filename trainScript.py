@@ -23,13 +23,14 @@ validGene = trainGenerator(4,
                            data_gen_args,
                            save_to_dir = None)
 model = unet()
+model.load_weights('/lfs/jonas/oldunet/weights.hdf5')
 model_checkpoint = ModelCheckpoint('/lfs/jonas/oldunet/weights.hdf5', 
                                    monitor='validation_loss',
                                    verbose=1, 
                                    save_best_only=True)
 model.fit(trainGene,
           steps_per_epoch=2000,
-          epochs=10,
+          epochs=100,
           callbacks=[model_checkpoint], 
           validation_data=validGene, 
           validation_steps=2,
