@@ -23,9 +23,9 @@ validGene = trainGenerator(4,
                            data_gen_args,
                            save_to_dir = None)
 model = unet()
-#model.load_weights('/lfs/jonas/oldunet/weights.hdf5')
+model.load_weights('/lfs/jonas/oldunet/roadweights.hdf5')
 model_checkpoint = ModelCheckpoint('/lfs/jonas/oldunet/roadweights.hdf5', 
-                                   monitor='validation_loss',
+                                   monitor='val_loss',
                                    verbose=1, 
                                    save_best_only=True)
 model.fit(trainGene,
