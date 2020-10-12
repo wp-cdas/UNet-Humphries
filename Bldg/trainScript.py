@@ -1,8 +1,8 @@
 from model import *
 from data import *
 from PIL import Image
-import cv2
 
+#28568
 data_gen_args = dict(rotation_range=0.2,
                     width_shift_range=0.05,
                     height_shift_range=0.05,
@@ -25,7 +25,7 @@ validGene = trainGenerator(4,
 model = unet()
 #model.load_weights('/lfs/jonas/oldunet/weights.hdf5')
 model_checkpoint = ModelCheckpoint('/lfs/jonas/oldunet/bldgweights.hdf5', 
-                                   monitor='validation_loss',
+                                   monitor='val_loss',
                                    verbose=1, 
                                    save_best_only=True)
 model.fit(trainGene,
@@ -34,7 +34,7 @@ model.fit(trainGene,
           callbacks=[model_checkpoint], 
           validation_data=validGene, 
           validation_steps=2,
-          verbose=1,
+          verbose=2,
           max_queue_size = 16,
           workers = 8,
           use_multiprocessing = True)
